@@ -243,15 +243,14 @@ public class MainWindow extends javax.swing.JFrame {
         try {
             String hashResult1, hashResult2;
 
-            
             MessageDigest mDigest1 = MessageDigest.getInstance("MD5");
             byte[] result1 = mDigest1.digest(inputString.getBytes());
             StringBuilder sb1 = new StringBuilder();
             for (int i = 0; i < result1.length; i++) {
                 sb1.append(Integer.toString((result1[i] & 0xff) + 0x100, 16).substring(1));
             }
-            hashResult1 =  sb1.toString();
-            
+            hashResult1 = sb1.toString();
+
             MessageDigest mDigest2 = MessageDigest.getInstance("SHA1");
             byte[] result2 = mDigest2.digest(inputString.getBytes());
             StringBuilder sb2 = new StringBuilder();
@@ -259,7 +258,7 @@ public class MainWindow extends javax.swing.JFrame {
                 sb2.append(Integer.toString((result2[i] & 0xff) + 0x100, 16).substring(1));
             }
             hashResult2 = sb2.toString();
-            
+
             MD5Field.setText(hashResult1);
             SHA1Field.setText(hashResult2);
         } catch (NoSuchAlgorithmException ex) {
