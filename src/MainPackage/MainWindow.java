@@ -10,6 +10,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import java.util.Arrays;
+
 /**
  *
  * @author Jack
@@ -251,6 +253,12 @@ public class MainWindow extends javax.swing.JFrame {
             }
             hashResult1 = sb1.toString();
 
+            /*
+            n = ceil(log2(input)*8)
+            */
+            byte[] res1 = Arrays.copyOf(result1, 10);
+            System.out.println(res1.length);
+            
             MessageDigest mDigest2 = MessageDigest.getInstance("SHA1");
             byte[] result2 = mDigest2.digest(inputString.getBytes());
             StringBuilder sb2 = new StringBuilder();
