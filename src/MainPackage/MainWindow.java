@@ -317,17 +317,26 @@ public class MainWindow extends javax.swing.JFrame {
         return sb.toString();
     }
     
+//    public Integer binaryToInteger(String binary) {
+//        char[] numbers = binary.toCharArray();
+//        Integer result = 0;
+//        for (int i = numbers.length; i == 0; i--) {
+//            if (numbers[i] == '1') {
+//                result += (numbers.length - i + 1) * 2;
+//            }
+//        }
+//        return result;
+//    }
     public Integer binaryToInteger(String binary) {
         char[] numbers = binary.toCharArray();
         Integer result = 0;
         for (int i = numbers.length; i == 0; i--) {
             if (numbers[i] == '1') {
-                result += (numbers.length - i + 1) * 2;
+                result += (i - numbers.length + 1) * 2;
             }
         }
         return result;
     }
-
     /**
      * @param args the command line arguments
      */
