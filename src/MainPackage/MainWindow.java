@@ -335,7 +335,7 @@ public class MainWindow extends javax.swing.JFrame {
                 result += (i - numbers.length + 1) * 2;
             }
         }
-        return result;
+        return result; 
     }
     /**
      * @param args the command line arguments
