@@ -229,6 +229,11 @@ public class MainWindow extends javax.swing.JFrame {
         refresh();
     }//GEN-LAST:event_MainButtonActionPerformed
 
+    private int getBit(byte b, int bitNum) {
+
+        return (b >> bitNum) & 1;
+    }
+
     private void InputFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InputFieldKeyReleased
         if (AutoRefresh.isSelected()) {
             refresh();
@@ -244,7 +249,7 @@ public class MainWindow extends javax.swing.JFrame {
         inputString = InputField.getText();
         try {
             String hashResult1, hashResult2;
-
+            // calculate MD5
             MessageDigest mDigest1 = MessageDigest.getInstance("MD5");
             byte[] result1 = mDigest1.digest(inputString.getBytes());
             StringBuilder sb1 = new StringBuilder();
@@ -253,12 +258,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
             hashResult1 = sb1.toString();
 
-            /*
-            n = ceil(log2(input)*8)
-            */
-            byte[] res1 = Arrays.copyOf(result1, 10);
-            System.out.println(res1.length);
-            
+            // calculate SHA1
             MessageDigest mDigest2 = MessageDigest.getInstance("SHA1");
             byte[] result2 = mDigest2.digest(inputString.getBytes());
             StringBuilder sb2 = new StringBuilder();
@@ -266,6 +266,30 @@ public class MainWindow extends javax.swing.JFrame {
                 sb2.append(Integer.toString((result2[i] & 0xff) + 0x100, 16).substring(1));
             }
             hashResult2 = sb2.toString();
+
+            // compute bits of hash
+            byte[] result;
+            if (md5.isSelected()) {
+                result = result1;
+            }else{
+                result = result2;
+            }
+
+            String s = "";
+            for (byte b : result) {
+                s = s + Integer.toBinaryString(0x100 + b).substring(1);
+            }
+
+            
+            
+            
+            
+            System.out.println(s);
+            Object spValue = jSpinner1.getValue();
+            int intValue = Integer.parseInt(spValue.toString());
+            System.out.println(intValue);
+            int numBytes = (int) Math.ceil(intValue / 8) + 1;
+            System.out.println(numBytes);
 
             MD5Field.setText(hashResult1);
             SHA1Field.setText(hashResult2);
