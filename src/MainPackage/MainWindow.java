@@ -253,7 +253,7 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane2.setViewportView(InputBytesField);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Строка в виде байтов:");
+        jLabel8.setText("Строка в виде байтов (кодировка UTF-8):");
         jLabel8.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -344,7 +344,6 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
-
     public static String bytesToHex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 3];
         for (int j = 0; j < bytes.length; j++) {
