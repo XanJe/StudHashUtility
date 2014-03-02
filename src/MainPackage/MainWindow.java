@@ -137,8 +137,8 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel3.setText("Взять первые");
 
         jSpinner1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(10, 1, 64, 1));
         jSpinner1.setRequestFocusEnabled(false);
-        jSpinner1.setValue(10);
         jSpinner1.setVerifyInputWhenFocusTarget(false);
         jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -360,16 +360,6 @@ public class MainWindow extends javax.swing.JFrame {
         return sb.toString();
     }
 
-//    public Integer binaryToInteger(String binary) {
-//        char[] numbers = binary.toCharArray();
-//        Integer result = 0;
-//        for (int i = numbers.length; i == 0; i--) {
-//            if (numbers[i] == '1') {
-//                result += (numbers.length - i + 1) * 2;
-//            }
-//        }
-//        return result;
-//    }
     public Integer binaryToInteger(String binary) {
         int len = binary.length();
         Integer result = 0;
