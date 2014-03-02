@@ -10,8 +10,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import java.util.Arrays;
-
 /**
  *
  * @author Jack
@@ -75,6 +73,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         MainButton.setText("Подсчитать хеш");
+        MainButton.setEnabled(false);
         MainButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MainButtonActionPerformed(evt);
@@ -162,7 +161,7 @@ public class MainWindow extends javax.swing.JFrame {
         sha1.setText("SHA-1");
 
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
@@ -196,17 +195,16 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(md5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sha1))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ResultField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(ResultField, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(ResultField1))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addGap(18, 18, 18)
+                            .addComponent(ResultField, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -274,11 +272,6 @@ public class MainWindow extends javax.swing.JFrame {
         refresh();
     }//GEN-LAST:event_MainButtonActionPerformed
 
-    private int getBit(byte b, int bitNum) {
-
-        return (b >> bitNum) & 1;
-    }
-
     private void InputFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InputFieldKeyReleased
         if (AutoRefresh.isSelected()) {
             refresh();
@@ -298,9 +291,9 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_md5StateChanged
 
     private void AutoRefreshStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_AutoRefreshStateChanged
-        if (AutoRefresh.isSelected()== true){
+        if (AutoRefresh.isSelected() == true) {
             MainButton.setEnabled(false);
-        } else{
+        } else {
             MainButton.setEnabled(true);
         }
     }//GEN-LAST:event_AutoRefreshStateChanged
@@ -318,7 +311,6 @@ public class MainWindow extends javax.swing.JFrame {
                 sb1.append(Integer.toString((result1[i] & 0xff) + 0x100, 16).substring(1));
             }
             hashResult1 = sb1.toString();
-
             // calculate SHA1
             MessageDigest mDigest2 = MessageDigest.getInstance("SHA1");
             byte[] result2 = mDigest2.digest(inputString.getBytes());
@@ -327,29 +319,25 @@ public class MainWindow extends javax.swing.JFrame {
                 sb2.append(Integer.toString((result2[i] & 0xff) + 0x100, 16).substring(1));
             }
             hashResult2 = sb2.toString();
-
-            // compute bits of hash
-            byte[] result;
-            if (md5.isSelected()) {
-                result = result1;
-            } else {
-                result = result2;
-            }
-
-            String s = toBinary(result);
-            jTextArea1.setText(s);
-
-            Object spValue = jSpinner1.getValue();
-            String s2 = s.substring(0, Integer.parseInt(spValue.toString()));
-            ResultField.setText(s2);
-            int num = binaryToInteger(s2);
-            ResultField1.setText(Integer.toString(num));
-
-            MD5Field.setText(hashResult1);
-            SHA1Field.setText(hashResult2);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
+        // compute bits of hash
+        byte[] result;
+        if (md5.isSelected()) {
+            result = result1;
+        } else {
+            result = result2;
+        }
+        String s = toBinary(result);
+        jTextArea1.setText(s);
+        Object spValue = jSpinner1.getValue();
+        String s2 = s.substring(0, Integer.parseInt(spValue.toString()));
+        ResultField.setText(s2);
+        long num = binaryToInteger(s2);
+        ResultField1.setText(Long.toString(num));
+        MD5Field.setText(hashResult1);
+        SHA1Field.setText(hashResult2);
     }
 
     String toBinary(byte[] bytes) {
@@ -360,10 +348,10 @@ public class MainWindow extends javax.swing.JFrame {
         return sb.toString();
     }
 
-    public Integer binaryToInteger(String binary) {
+    public Long binaryToInteger(String binary) {
         int len = binary.length();
-        Integer result = 0;
-        int w = 1;
+        long result = 0;
+        long w = 1;
         for (int i = 0; i < len; i++) {
             if (binary.charAt(len - 1 - i) == '1') {
                 result += w;
@@ -393,7 +381,6 @@ public class MainWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
