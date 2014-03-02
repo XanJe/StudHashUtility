@@ -5,6 +5,7 @@
  */
 package MainPackage;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
@@ -307,14 +308,24 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AutoRefreshStateChanged
 
-    private void refresh() {
-        String inputString;
-        inputString = InputField.getText();
+    public String getString() {
+        byte ptext[] = InputField.getText().getBytes();
+        String inputStr = null;
         try {
+            inputStr = new String(ptext, "UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return inputStr;
+    }
+
+    private void refresh() {
+        try {
+            String inputStr = getString();
             String hashResult1, hashResult2;
             // calculate MD5
             MessageDigest mDigest1 = MessageDigest.getInstance("MD5");
-            byte[] result1 = mDigest1.digest(inputString.getBytes());
+            byte[] result1 = mDigest1.digest(inputStr.getBytes());
             StringBuilder sb1 = new StringBuilder();
             for (int i = 0; i < result1.length; i++) {
                 sb1.append(Integer.toString((result1[i] & 0xff) + 0x100, 16).substring(1));
@@ -322,18 +333,20 @@ public class MainWindow extends javax.swing.JFrame {
             hashResult1 = sb1.toString();
             // calculate SHA1
             MessageDigest mDigest2 = MessageDigest.getInstance("SHA1");
-            byte[] result2 = mDigest2.digest(inputString.getBytes());
+            byte[] result2 = mDigest2.digest(inputStr.getBytes());
             StringBuilder sb2 = new StringBuilder();
             for (int i = 0; i < result2.length; i++) {
                 sb2.append(Integer.toString((result2[i] & 0xff) + 0x100, 16).substring(1));
             }
             hashResult2 = sb2.toString();
-            byte[] result;
-            if (md5.isSelected()) {
-                result = result1;
-            } else {
-                result = result2;
-            }
+//            byte[] result;
+//            if (md5.isSelected()) {
+//                result = result1;
+//            } else {
+//                result = result2;
+//            }
+            byte[] result = md5.isSelected() ? result1 : result2;
+
             // compute bits of hash
             String s = toBinary(result);
             jTextArea1.setText(s);
