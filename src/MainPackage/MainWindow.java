@@ -309,14 +309,15 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_AutoRefreshStateChanged
 
     public String getString() {
-        byte ptext[] = InputField.getText().getBytes();
-        String inputStr = null;
+        String inputString = InputField.getText();
+        byte ptext[] = inputString.getBytes();
+        String inputUTF8 = null;
         try {
-            inputStr = new String(ptext, "UTF-8");
+            inputUTF8 = new String(ptext, "UTF-8");
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return inputStr;
+        return inputUTF8;
     }
 
     private void refresh() {
