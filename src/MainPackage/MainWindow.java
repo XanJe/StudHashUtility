@@ -319,25 +319,25 @@ public class MainWindow extends javax.swing.JFrame {
                 sb2.append(Integer.toString((result2[i] & 0xff) + 0x100, 16).substring(1));
             }
             hashResult2 = sb2.toString();
+            byte[] result;
+            if (md5.isSelected()) {
+                result = result1;
+            } else {
+                result = result2;
+            }
+            // compute bits of hash
+            String s = toBinary(result);
+            jTextArea1.setText(s);
+            Object spValue = jSpinner1.getValue();
+            String s2 = s.substring(0, Integer.parseInt(spValue.toString()));
+            ResultField.setText(s2);
+            long num = binaryToInteger(s2);
+            ResultField1.setText(Long.toString(num));
+            MD5Field.setText(hashResult1);
+            SHA1Field.setText(hashResult2);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // compute bits of hash
-        byte[] result;
-        if (md5.isSelected()) {
-            result = result1;
-        } else {
-            result = result2;
-        }
-        String s = toBinary(result);
-        jTextArea1.setText(s);
-        Object spValue = jSpinner1.getValue();
-        String s2 = s.substring(0, Integer.parseInt(spValue.toString()));
-        ResultField.setText(s2);
-        long num = binaryToInteger(s2);
-        ResultField1.setText(Long.toString(num));
-        MD5Field.setText(hashResult1);
-        SHA1Field.setText(hashResult2);
     }
 
     String toBinary(byte[] bytes) {
