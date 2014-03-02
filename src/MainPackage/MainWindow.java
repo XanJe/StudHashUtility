@@ -55,7 +55,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Вычисления Hash-функции");
+        setTitle("Вычисление Hash-функции");
         setName("Main_frame"); // NOI18N
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -64,8 +64,8 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         InputField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        InputField.setText("Введите сюда сообщение");
-        InputField.setToolTipText("Введите сюда сообщение");
+        InputField.setText("Введите сообщение");
+        InputField.setToolTipText("");
         InputField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 InputFieldKeyReleased(evt);
@@ -90,6 +90,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        MD5Field.setEditable(false);
+        MD5Field.setBackground(new java.awt.Color(255, 255, 255));
         MD5Field.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -99,6 +101,8 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("SHA1 (160 бит)");
 
+        SHA1Field.setEditable(false);
+        SHA1Field.setBackground(new java.awt.Color(255, 255, 255));
         SHA1Field.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -160,17 +164,22 @@ public class MainWindow extends javax.swing.JFrame {
         sha1.setSelected(true);
         sha1.setText("SHA-1");
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        ResultField.setEditable(false);
+        ResultField.setBackground(new java.awt.Color(255, 255, 255));
         ResultField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Результат в двоичной форме:");
 
+        ResultField1.setEditable(false);
+        ResultField1.setBackground(new java.awt.Color(255, 255, 255));
         ResultField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
