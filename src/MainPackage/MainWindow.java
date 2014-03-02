@@ -56,7 +56,9 @@ public class MainWindow extends javax.swing.JFrame {
         ResultField1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        utfField = new javax.swing.JTextArea();
+        InputBytesField = new javax.swing.JTextArea();
+        jLabel7 = new javax.swing.JLabel();
+        inputEncodingLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Вычисление Hash-функции");
@@ -214,10 +216,11 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ResultField1))
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ResultField, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 23, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -243,29 +246,43 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        utfField.setColumns(20);
-        utfField.setLineWrap(true);
-        utfField.setRows(5);
-        jScrollPane2.setViewportView(utfField);
+        InputBytesField.setColumns(20);
+        InputBytesField.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        InputBytesField.setLineWrap(true);
+        InputBytesField.setRows(3);
+        jScrollPane2.setViewportView(InputBytesField);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Строка в виде байтов:");
+        jLabel7.setToolTipText("");
+
+        inputEncodingLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        inputEncodingLabel.setText("(Кодировка ввода:)");
+        inputEncodingLabel.setToolTipText("");
+        inputEncodingLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(InputField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(InputField)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(MainButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(AutoRefresh, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(MainButton)
-                            .addComponent(AutoRefresh))))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(inputEncodingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -273,18 +290,20 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(InputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(inputEncodingLabel))
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(108, 108, 108)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(MainButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AutoRefresh)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
+                .addComponent(MainButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AutoRefresh)
                 .addContainerGap())
         );
 
@@ -323,12 +342,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     public String getString() {
         String inputString = InputField.getText();
-
-        byte ptext[] = null;
-        
+        inputEncodingLabel.setText("(Кодировка ввода: "+Charset.defaultCharset().name()+")");
+        byte inputBytes[] = null;
         try {
-            ptext = inputString.getBytes("cp1251");
-//        String report = bytesToHex(ptext);
+            inputBytes = inputString.getBytes(Charset.defaultCharset().name());
+            
+//        Srting report = bytesToHex(inputBytes);
 //        utfField.setText(report);
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
@@ -337,15 +356,15 @@ public class MainWindow extends javax.swing.JFrame {
         
         String inputUTF8 = null;
         try {
-            inputUTF8 = new String(ptext, "UTF-8");
+            inputUTF8 = new String(inputBytes, "UTF-8");
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
         byte[] test = inputUTF8.getBytes();
         String report = bytesToHex(test);
         System.out.println(report);
-        utfField.setText(Charset.defaultCharset().name());
-        utfField.append("\n"+report);
+        InputBytesField.setText(Charset.defaultCharset().name());
+        InputBytesField.append("\n"+report);
          System.out.println(Charset.defaultCharset().name());
         return inputUTF8;
         
@@ -458,18 +477,21 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox AutoRefresh;
+    private javax.swing.JTextArea InputBytesField;
     private javax.swing.JTextField InputField;
     private javax.swing.JTextField MD5Field;
     private javax.swing.JButton MainButton;
     private javax.swing.JTextField ResultField;
     private javax.swing.JTextField ResultField1;
     private javax.swing.JTextField SHA1Field;
+    private javax.swing.JLabel inputEncodingLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -479,7 +501,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JRadioButton md5;
     private javax.swing.ButtonGroup selectAlgorithm;
     private javax.swing.JRadioButton sha1;
-    private javax.swing.JTextArea utfField;
     // End of variables declaration//GEN-END:variables
 
 }
